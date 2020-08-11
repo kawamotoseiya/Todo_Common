@@ -1,0 +1,32 @@
+<div class="container">
+	<div class="row">
+	<h2 class="col-xs-10">グループ一覧</h2>
+	<%= link_to new_groups_path do %>
+		<button class="btn-circle btn-lg" >＋</button>
+	<% end %>
+	</div>
+	<div class="row">
+		<table class="table table-hover">
+			<thead>
+			<tr>
+				<th>グループID</th>
+				<th>グループ名</th>
+				<th>参加数</th>
+			</tr>
+			</thead>
+			<tbody>
+				<% @group_users.each do |group_user| %>
+			<tr>
+				<td><%= group_user.user.image %></td>
+				<td><%= group_user.user.name %></td>
+				<td><%= form_for @roup_user, url: group_users_path do |f| %>
+					<label><%= f.radio_button :group_status, "許可" ,checked: "checked"%>許可</label>
+					<label><%= f.radio_button :group_status, "拒否" %>拒否</label>
+					<%= f.submit "決定", class: "btn btn-primary" %>
+					<% end %>
+				</td>
+			</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>

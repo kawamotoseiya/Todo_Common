@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+	<h2 class="col-xs-10">グループ一覧</h2>
+	<%= link_to new_group_path do %>
+		<button class="btn-circle btn-lg" >＋</button>
+	<% end %>
+	</div>
+	<div class="row">
+		<table class="table table-hover">
+			<thead>
+			<tr>
+				<th>グループID</th>
+				<th>作成者</th>
+				<th>グループ名</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+				<% @group_users.each do |group_user| %>
+			<tr>
+				<td><%= group_user.group.id %></td>
+				<td><%= group_user.group.user.name %></td>
+				<td><%= group_user.group.name %></td>
+				<td><%= link_to "詳細", group_todolists_path(group_user.group) %></td>
+			</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>

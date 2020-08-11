@@ -1,0 +1,16 @@
+<div class="container">
+<h2>グループ作成</h2>
+	<div class="row">
+		<%= form_for @group, url: groups_path do |f| %>
+		<%= f.label :グループ名 %>
+		<%= f.text_field :name %>
+		<%= f.label :グループ検索 %>
+		<label><%= f.radio_button :group_key_flag, "有効" ,checked: "checked"%> 有効 </label>
+		<label><%= f.radio_button :group_key_flag, "無効" %> 無効</label>
+		<%= f.submit "グループ新規作成", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<%= link_to "戻る", :back %>
+	</div>
+</div>

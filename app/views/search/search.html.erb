@@ -1,0 +1,35 @@
+<div class="container">
+	<h3>検索結果</h3>
+	<div class="row">
+		<table>
+			<% if @group.group_key_flag == "有効" %>
+			<tr>
+				<th>グループID</th>
+				<th>画像</th>
+				<th>作成者</th>
+				<th>グループ名</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td><%= @group.id %></td>
+				<td><%= attachment_image_tag @group.user, :image, fallback: "no_image.jpg", class:"search-image", size: "40x40" %></td>
+				<td><%= @group.user.name %></td>
+				<td><%= @group.name %></td>
+				<% if @group.group_users.include?(@group_user) %>
+				<td><%= @group_user.join_status %></td>
+				<% else %>
+				<td>
+					<%= link_to "参加する",group_group_users_path(@group.id), method: :post %>
+				</td>
+				<% end %>
+			</tr>
+			<% else %>
+			<h4>一致するグループは見つかりませんでした。<br>
+			検索したグループが存在しない、またはグループ作成者が検索を無効としています。</h4>
+			<% end %>
+		</table>
+	</div>
+	<div class="row">
+		<%= link_to "戻る", groups_path %>
+	</div>
+</div>

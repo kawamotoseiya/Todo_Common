@@ -4,12 +4,35 @@
     <title>TodoCommon</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/6a7bab16e6.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header class="navbar navbar-inverse">
+      <div class="container">
+        <nav class="nav navbar-nav navbar-left">
+          <h3>TodoCommon</h3>
+        </nav>
+        <nav class="nav navbar-nav navbar-right">
+          <% if signed_in? %>
+          <%= form_tag search_search_path,:method => 'get' do %>
+          <li><%= text_field_tag 'search[content]',"", class: "search-tag" %>
+          </li>
+          <li><%= submit_tag '検索', class: "btn btn-primary" %></li>
+          <% end %>
+          <li><%= link_to 'グループ一覧', groups_path %></li>
+          <li><%= link_to 'ユーザー情報編集', edit_user_path(current_user) %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+          <% else %>
+          <li><%= link_to 'トップページ', root_path %></li>
+          <li><%= link_to 'ユーザー情報登録', new_user_registration_path %></li>
+          <li><%= link_to 'ログイン', new_user_session_path %></li>
+          <% end %>
+        </nav>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>

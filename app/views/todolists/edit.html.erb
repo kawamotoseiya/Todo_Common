@@ -1,0 +1,15 @@
+<div class="container">
+	<h3>編集</h3>
+	<div class="row">
+		<%= form_for @todolist, url: group_todolist_path do |f| %>
+		<%= f.label :表題 %>
+		<%= f.text_field :head %>
+		<%= f.label :内容 %>
+		<%= f.text_area :body %>
+		<%= f.submit "更新", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<%= link_to "戻る", :back %>
+	</div>
+</div>

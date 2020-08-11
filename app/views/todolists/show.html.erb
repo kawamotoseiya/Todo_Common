@@ -1,0 +1,37 @@
+<div class="container">
+	<h3>詳細</h3>
+	<div class="row">
+		<table>
+			<tr>
+				<td></td>
+				<td><%= @todolist.head %></td>
+				<td><%= link_to "編集", edit_group_todolist_path(@todolist) %></td>
+				<td><%= link_to "削除", group_todolist_path(@todolist), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %></td>
+			</tr>
+		</table>
+		<div><%= @todolist.body %></div>
+	</div>
+	<div class="row">
+		<table>
+		<% @comments.each do |comment| %>
+		<tr>
+			<td><%= attachment_image_tag comment.user, :image, fallback: "no_image.jpg", class:"comment-image", size: "40x40" %></td>
+			<td><%= comment.user.name %></td>
+			<td><%= comment.comment %></td>
+			<% if comment.user == current_user %>
+			<td><%= link_to "削除",group_todolist_comment_path(@group, @todolist, comment), method: :delete, class: "comment_destroy" %></td>
+			<% end %>
+		</tr>
+		<% end %>
+		</table>
+	</div>
+	<div class="row">
+		<%= form_for @comment, url:  group_todolist_comments_path(@group, @todolist) do |f| %>
+		<%= f.text_area :comment %>
+		<%= f.submit "コメントする", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<%= link_to "戻る", :back %>
+	</div>
+</div>

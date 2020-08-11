@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="row">
+		<h3><%= @group.name %></h3>
+		<% if @group.user_id == current_user.id %>
+		<%= link_to "編集", edit_group_path(@group.id) %>
+		<%= link_to "削除", group_path(@group.id), method: :delete, data: {confirm: "グループを削除してもよろしいですか？"} %>
+		<% end %>
+		<%= link_to "メンバー一覧", group_group_users_path(@group.id) %>
+	</div>
+	<div class="row">
+		<%= link_to new_group_todolist_path(@group.id) do %>
+		<button class="btn-circle btn-lg" >＋</button>
+		<% end %>
+	</div>
+	<div class="row">
+		<table>
+			<% @todolists.each do |todolist| %>
+			<tr>
+				<% if todolist.checked_by?(current_user)%>
+				<td><%= link_to group_todolist_checks_path(@group, todolist), method: :delete do %>
+					<i class="fab fa-angellist" aria-hidden="true" style="color: red;" ></i><% end %>
+					<%= todolist.checks.count %>
+				</td>
+				<% else %>
+				<td><%= link_to group_todolist_checks_path(@group, todolist), method: :post do %><i class="fab fa-angellist" aria-hidden="true" ></i><% end %>
+					<%= todolist.checks.count %>
+				</td>
+				<% end %>
+				<td><%= link_to todolist.head, group_todolist_path(@group, todolist) %>
+				</td>
+				<td><%= link_to "編集", edit_group_todolist_path(@group, todolist) %></td>
+				<td><%= link_to "削除", group_todolist_path(@group, todolist), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %></td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+	<div class="row">
+		<%= link_to "戻る", groups_path %>
+	</div>
+</div>
