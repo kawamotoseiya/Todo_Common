@@ -1,37 +1,45 @@
 <div class="container">
-	<h3>詳細</h3>
+	<h1>詳細</h1>
 	<div class="row">
-		<table>
-			<tr>
-				<td></td>
-				<td><%= @todolist.head %></td>
-				<td><%= link_to "編集", edit_group_todolist_path(@todolist) %></td>
-				<td><%= link_to "削除", group_todolist_path(@todolist), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"} %></td>
-			</tr>
-		</table>
-		<div><%= @todolist.body %></div>
-	</div>
+				<h3 class="col-xs-2">表題</h3>
+				<h3 class="col-xs-6"><%= @todolist.head %></h3>
+		</div>
+		<div class="row">
+		<h3 class="col-xs-2">内容</h3><br>
+		<h4 class="col-xs-8"><%= @todolist.body %></h4>
+		</div>
+		<br>
 	<div class="row">
-		<table>
+		<% if @comments.exists? %>
+		<h3 class="col-xs-2">コメント</h3>
+		<% end %>
+		<table class="table table-hover">
 		<% @comments.each do |comment| %>
 		<tr>
-			<td><%= attachment_image_tag comment.user, :image, fallback: "no_image.jpg", class:"comment-image", size: "40x40" %></td>
-			<td><%= comment.user.name %></td>
-			<td><%= comment.comment %></td>
+			<td class="col-xs-1"><%= attachment_image_tag comment.user, :image, fallback: "no_image.jpg", class:"comment-image", size: "40x40" %></td>
+			<td class="col-xs-2"><%= comment.user.name %></td>
+			<td class="col-xs-5"><%= comment.comment %></td>
 			<% if comment.user == current_user %>
-			<td><%= link_to "削除",group_todolist_comment_path(@group, @todolist, comment), method: :delete, class: "comment_destroy" %></td>
+			<td class="col-xs-1"><%= link_to "削除",group_todolist_comment_path(@group.id, @todolist.id, comment.id), method: :delete, class: "btn btn-danger" %></td>
+			<% else %>
+			<td></td>
 			<% end %>
 		</tr>
 		<% end %>
 		</table>
 	</div>
-	<div class="row">
-		<%= form_for @comment, url:  group_todolist_comments_path(@group, @todolist) do |f| %>
-		<%= f.text_area :comment %>
-		<%= f.submit "コメントする", class: "btn btn-primary" %>
-		<% end %>
+	<br>
+		<%= form_for @comment, url:  group_todolist_comments_path(@group.id, @todolist.id) do |f| %>
+		<div class="row">
+		<div>
+			<%= f.text_area :comment, class: "col-xs-12", style: "height: 60px;" %>
+		</div>
 	</div>
 	<div class="row">
-		<%= link_to "戻る", :back %>
+		<%= f.submit "コメントする", class: "btn btn-default col-xs-12" %>
+	</div>
+		<% end %>
+	<div class="row">
+		<%= link_to "戻る", group_todolists_path(@group.id), class: "btn btn-primary" %>
 	</div>
 </div>

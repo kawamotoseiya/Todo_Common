@@ -1,6 +1,7 @@
 class TodolistsController < ApplicationController
 	def new
 		@todolist = Todolist.new
+		@group = Group.find(params[:group_id])
 	end
 	def create
 		@group = Group.find(params[:group_id])
@@ -22,6 +23,7 @@ class TodolistsController < ApplicationController
 	end
 	def edit
 		@todolist = Todolist.find(params[:id])
+		@group = Group.find(params[:group_id])
 	end
 	def update
 		@todolist = Todolist.find(params[:id])

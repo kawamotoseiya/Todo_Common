@@ -1,10 +1,21 @@
 <div class="container">
 	<div class="row">
-	<h2 class="col-xs-10">グループ一覧</h2>
-	<%= link_to new_group_path do %>
-		<button class="btn-circle btn-lg" >＋</button>
-	<% end %>
+	<h1 class="col-xs-3">グループ一覧</h1>
+	<div class="col-xs-9">
+		<div class="group_new">
+	<%= form_for @group, url: groups_path do |f| %>
+		<%= f.label :グループ名 %>
+		<%= f.text_field :name %>
+		<%= f.label :　グループ検索 %>
+		<label><%= f.radio_button :group_key_flag, "有効" ,checked: "checked"%> 有効 </label>
+		<label><%= f.radio_button :group_key_flag, "無効" %> 無効</label>
+		<%= f.label :　%>
+		<%= f.submit "グループ新規作成", class: "btn btn-default" %>
+		<% end %>
+		</div>
 	</div>
+	</div>
+	<% if @group_users.exists? %>
 	<div class="row">
 		<table class="table table-hover">
 			<thead>
@@ -21,9 +32,18 @@
 				<td><%= group_user.group.id %></td>
 				<td><%= group_user.group.user.name %></td>
 				<td><%= group_user.group.name %></td>
-				<td><%= link_to "詳細", group_todolists_path(group_user.group) %></td>
+				<td><%= link_to "詳細", group_todolists_path(group_user.group.id),class: "btn btn-info" %></td>
 			</tr>
 				<% end %>
 			</tbody>
 		</table>
+		<% else %>
+		<div>
+			<div class="text-center">
+				<i class="fas fa-hands-helping" style="font-size: 100px; color: gray;" ></i>
+			</div>
+			<h3 class="text-center" style="color: gray;">新しいグループを作成しましょう！</h3>
+		</div>
+		<% end %>
 	</div>
+</div>

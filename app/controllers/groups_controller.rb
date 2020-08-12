@@ -15,6 +15,7 @@ class GroupsController < ApplicationController
 		redirect_to groups_path
 	end
 	def index
+		@group = Group.new
 		@group_users = GroupUser.where(user_id: current_user.id, join_status: '参加中')
 	end
 	def edit

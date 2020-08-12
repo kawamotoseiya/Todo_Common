@@ -17,7 +17,7 @@
 			<tbody>
 				<% @group_users.each do |group_user| %>
 			<tr>
-				<td><%= group_user.user.image %></td>
+				<td><%= attachment_image_tag group_user.user, :image, class: "img-square", fallback: "no_image.jpg", size:"200x200" %></td>
 				<td><%= group_user.user.name %></td>
 				<td><%= form_for @roup_user, url: group_users_path do |f| %>
 					<label><%= f.radio_button :group_status, "許可" ,checked: "checked"%>許可</label>

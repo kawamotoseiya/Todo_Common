@@ -1,7 +1,7 @@
 <div class="container">
 	<h3>検索結果</h3>
 	<div class="row">
-		<table>
+		<table class="table table-hover">
 			<% if @group.group_key_flag == "有効" %>
 			<tr>
 				<th>グループID</th>
@@ -19,17 +19,22 @@
 				<td><%= @group_user.join_status %></td>
 				<% else %>
 				<td>
-					<%= link_to "参加する",group_group_users_path(@group.id), method: :post %>
+					<%= link_to "参加する",group_group_users_path(@group.id), method: :post, class: "btn btn-default" %>
 				</td>
 				<% end %>
 			</tr>
-			<% else %>
-			<h4>一致するグループは見つかりませんでした。<br>
-			検索したグループが存在しない、またはグループ作成者が検索を無効としています。</h4>
-			<% end %>
 		</table>
 	</div>
+	<% else %>
 	<div class="row">
-		<%= link_to "戻る", groups_path %>
+		<div class="text-center">
+			<i class="fab fa-sistrix" style="font-size: 100px; color: gray;"></i>
+		</div>
+		<h3 class="text-center" style="color: gray;">一致するグループは見つかりませんでした。<br>
+		検索したグループが存在しない、またはグループ作成者が検索を無効としています。</h3>
+	</div>
+	<% end %>
+	<div class="row">
+		<%= link_to "戻る", :back, class: "btn btn-primary text-center"%>
 	</div>
 </div>

@@ -4,13 +4,14 @@
 		<%= form_for @group, url: group_path do |f| %>
 		<%= f.label :グループ名 %>
 		<%= f.text_field :name %>
-		<%= f.label :グループ検索 %>
+		<%= f.label :　グループ検索 %>
 		<label><%= f.radio_button :group_key_flag, "有効" %> 有効 </label>
 		<label><%= f.radio_button :group_key_flag, "無効" %> 無効</label>
-		<%= f.submit "更新", class: "btn btn-primary" %>
+		<%= f.label :　%>
+		<%= f.submit "更新", class: "btn btn-success" %>
 		<% end %>
 	</div>
 	<div class="row">
-		<%= link_to "戻る", :back %>
+		<%= link_to "戻る", group_todolists_path(@group.id),class: "btn btn-primary" %>
 	</div>
 </div>

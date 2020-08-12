@@ -1,0 +1,25 @@
+.title{
+	font-family: cursive;
+	color: white;
+}
+.search_form{
+	position: relative;
+	top: 32px;
+	left:50px;
+}
+.group_new{
+	position: relative;
+	top: 20px;
+}
+.text-center{
+	position: relative;
+	top: 150px;
+}
+.todolist_form{
+	padding: 20px;
+}
+.todo_new{
+	position: relative;
+	top: 70px;
+	left: 60px;
+}

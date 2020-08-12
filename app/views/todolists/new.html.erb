@@ -1,15 +1,28 @@
 <div class="container">
-	<h3>todolist追加</h3>
+	<h2>todolist作成</h2>
 	<div class="row">
 		<%= form_for @todolist,url: group_todolists_path do |f| %>
-		<%= f.label :表題 %>
-		<%= f.text_field :head %>
-		<%= f.label :内容 %>
-		<%= f.text_area :body %>
-		<%= f.submit "追加", class: "btn btn-primary" %>
+		<div class="todolist_form">
+			<div class="col-xs-12">
+				<%= f.label :表題, class: "col-xs-1" %>
+				<%= f.text_field :head, class: "col-xs-6" %>
+			</div>
+		</div>
+		<div class="todolist_form">
+			<div class="col-xs-12">
+				<%= f.label :内容, class: "col-xs-1" %>
+				<%= f.text_area :body, class: "col-xs-6",style: "height: 200px;" %>
+			</div>
+		</div>
+		<div class="todolist_form">
+			<div class="col-xs-12"><br>
+				<div class="col-xs-1"></div>
+				<%= f.submit "追加", class: "btn btn-success" %>
+			</div>
+		</div>
 		<% end %>
 	</div>
 	<div class="row">
-		<%= link_to "戻る", :back %>
+		<%= link_to "戻る", group_todolists_path(@group.id), class: "btn btn-primary" %>
 	</div>
 </div>
