@@ -8,8 +8,14 @@
 			<%= f.attachment_field :image %>
 		</div>
 		<div class="col-xs-8">
+			<div>
 			<%= f.label :ユーザーネーム %>
 			<%= f.text_field :name %>
+			</div><br>
+			<div>
+				<%= f.label :メールアドレス %>
+				<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+			</div>
 		</div>
 		</div>
 		<div class="row">

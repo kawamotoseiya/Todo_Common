@@ -1,4 +1,7 @@
 class SearchController < ApplicationController
+	def search_form
+	end
+
 	def search
 		content = params["search"]["content"]
 		if Group.exists?(id: content)

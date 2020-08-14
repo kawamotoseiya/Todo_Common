@@ -1,1 +1,15 @@
-<h1>Topページ</h1>
+<div class="top-visual">
+	<div class="row">
+		<h1 class="top-title">welcome to TodoCommon</h1>
+	</div>
+	<div class="row">
+		<p class="top-text">グループを作成し、TODOリストを作成するサイトです。</p>
+		<p class="top-text">自分の作成したグループのIDを伝えることでTODOリストを共有することができます。</p>
+		<p class="top-text">一人だけでなく仲間と一緒に取り組むことで人生を充実させよう。</p>
+	</div>
+	<div class="row">
+		<p class="top-devise">
+			<%=link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
+			<%=link_to "Sign up", new_user_registration_path, class: "btn btn-success" %></p>
+	</div>
+</div>

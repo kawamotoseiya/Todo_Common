@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="row">
+	<h2>検索ページ</h2>
+	</div>
+	<%= form_tag search_search_path,:method => 'get' do %>
+	<%= text_field_tag 'search[content]',"", :placeholder => "グループID検索" ,class: "search-tag" %>
+    <%= submit_tag '検索', style: "background-color: #CCFFFF;" %>
+    <% end %>
+    <div class="row"><br>
+		<%= link_to "戻る", :back, class: "btn btn-primary" %>
+	</div>
+</div>

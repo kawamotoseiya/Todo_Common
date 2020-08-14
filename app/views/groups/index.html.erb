@@ -1,17 +1,9 @@
 <div class="container">
 	<div class="row">
-	<h1 class="col-xs-3">グループ一覧</h1>
-	<div class="col-xs-9">
+	<h1 class="col-xs-9">グループ一覧</h1>
+	<div class="col-xs-3">
 		<div class="group_new">
-	<%= form_for @group, url: groups_path do |f| %>
-		<%= f.label :グループ名 %>
-		<%= f.text_field :name %>
-		<%= f.label :　グループ検索 %>
-		<label><%= f.radio_button :group_key_flag, "有効" ,checked: "checked"%> 有効 </label>
-		<label><%= f.radio_button :group_key_flag, "無効" %> 無効</label>
-		<%= f.label :　%>
-		<%= f.submit "グループ新規作成", class: "btn btn-default" %>
-		<% end %>
+			<%= link_to "グループ新規作成", new_group_path, class: "btn btn-default" %>
 		</div>
 	</div>
 	</div>

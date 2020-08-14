@@ -1,25 +1,94 @@
-.title{
+header {
+    margin: 0;
+}
+.nav-title{
 	font-family: cursive;
 	color: white;
 }
-.search_form{
+main{
+	width: 100%;
+	height: 800px;
+	background-image: url(cropwashitexture07.jpg)
+}
+.top-visual{
+	background-image: url(jan-kahanek-g3O5ZtRk2E4-unsplash.jpg);
+	width: 100%;
+	height: 800px;
+	background-size: cover;
+	background-position: center;
+}
+.top-title{
 	position: relative;
-	top: 32px;
-	left:50px;
+	top: 100px;
+	font-family: cursive;
+	text-align: center;
+	padding-bottom: 20px;
+}
+.top-text{
+	position: relative;
+	top: 100px;
+	text-align: center;
+}
+.top-devise{
+	position: relative;
+	top: 100px;
+	text-align: center;
+	padding-top: 30px;
+}
+.table-hover{
+	background-color: #F1F1F1;
 }
 .group_new{
 	position: relative;
-	top: 20px;
+	top: 30px;
 }
-.text-center{
+.todolists-new{
+	text-align: right;
+	position: relative;
+	bottom: 30px;
+}
+.todolists-text{
 	position: relative;
 	top: 150px;
+	text-align: center;
 }
-.todolist_form{
+.todolist_new-form{
 	padding: 20px;
 }
-.todo_new{
+.todolist_edit-form{
+	padding: 20px;
+}
+.comment-title{
 	position: relative;
-	top: 70px;
-	left: 60px;
+	top: 30px;
+}
+.comment-form{
+	text-align: center;
+}
+footer{
+	width: 100%;
+	height: 10%;
+	background-color: black;
+	position: absolute;
+	bottom: 0;
+}
+.footer-text{
+	text-align: center;
+	color: gray;
+	position: relative;
+	top: 35px;
+}
+.footer-social{
+	text-align: right;
+	position: relative;
+	bottom: 10px;
+}
+.fa-instagram-square{
+	padding-right: 10px;
+}
+.fa-facebook{
+	padding: 10px;
+}
+.icon-twitter{
+	padding-left: 10px;
 }

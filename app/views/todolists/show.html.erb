@@ -2,25 +2,24 @@
 	<h1>詳細</h1>
 	<div class="row">
 				<h3 class="col-xs-2">表題</h3>
-				<h3 class="col-xs-6"><%= @todolist.head %></h3>
+				<h3 class="col-xs-8"><%= @todolist.head %></h3>
 		</div>
 		<div class="row">
 		<h3 class="col-xs-2">内容</h3><br>
 		<h4 class="col-xs-8"><%= @todolist.body %></h4>
 		</div>
-		<br>
 	<div class="row">
 		<% if @comments.exists? %>
-		<h3 class="col-xs-2">コメント</h3>
+		<h3 class="comment-title">コメント</h3>
 		<% end %>
-		<table class="table table-hover">
+		<table class="table table-hover" style="width: 62%; margin-left: auto; margin-right: auto;">
 		<% @comments.each do |comment| %>
 		<tr>
-			<td class="col-xs-1"><%= attachment_image_tag comment.user, :image, fallback: "no_image.jpg", class:"comment-image", size: "40x40" %></td>
-			<td class="col-xs-2"><%= comment.user.name %></td>
-			<td class="col-xs-5"><%= comment.comment %></td>
+			<td><%= attachment_image_tag comment.user, :image, fallback: "no_image.jpg", class:"comment-image", size: "40x40" %></td>
+			<td><%= comment.user.name %></td>
+			<td><%= comment.comment %></td>
 			<% if comment.user == current_user %>
-			<td class="col-xs-1"><%= link_to "削除",group_todolist_comment_path(@group.id, @todolist.id, comment.id), method: :delete, class: "btn btn-danger" %></td>
+			<td><%= link_to "削除",group_todolist_comment_path(@group.id, @todolist.id, comment.id), method: :delete, class: "btn btn-danger" %></td>
 			<% else %>
 			<td></td>
 			<% end %>
@@ -31,15 +30,16 @@
 	<br>
 		<%= form_for @comment, url:  group_todolist_comments_path(@group.id, @todolist.id) do |f| %>
 		<div class="row">
-		<div>
-			<%= f.text_area :comment, class: "col-xs-12", style: "height: 60px;" %>
+			<div class="comment-form">
+			<%= f.text_area :comment, style: "height: 60px; width: 60%;" %>
 		</div>
 	</div>
 	<div class="row">
-		<%= f.submit "コメントする", class: "btn btn-default col-xs-12" %>
+		<div class="comment-form">
+		<%= f.submit "コメントする", class: "btn btn-default",style: "width: 60%;" %>
 	</div>
 		<% end %>
-	<div class="row">
+	<div class="row"><br>
 		<%= link_to "戻る", group_todolists_path(@group.id), class: "btn btn-primary" %>
 	</div>
 </div>
