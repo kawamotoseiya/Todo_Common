@@ -12,7 +12,7 @@
 		<% @group_users.each do |group_user| %>
 		<div class="col-md-4" style="border: 1px solid; margin-left: 3px;">
 			<div class="col-md-5">
-				<%= attachment_image_tag group_user.group.user, :image, :fill, 150, 140, fallback:  "no_image.jpg",size:"150x140" class: "group-image" %>
+				<%= attachment_image_tag group_user.group.user, :image, :fill, 150, 140, fallback:  "no_image.jpg",size:"150x140", class: "group-image" %>
 			</div>
 			<div class="col-md-7 group-introduce"><br>
 				<div>作成者：<%= group_user.group.user.name %></div>
