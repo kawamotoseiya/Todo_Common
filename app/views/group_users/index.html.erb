@@ -7,7 +7,7 @@
 			<% @group_users.each do |group_user| %>
 			<tr>
 				<td>
-					<%= attachment_image_tag group_user.user, :image, class: "img-square", fallback: "no_image.jpg", size:"40x40" %>
+					<%= attachment_image_tag group_user.user, :image, class: "img-square", fallback: "no_image.jpg", size:"50x50" %>
 				</td>
 				<td>
 					<%= group_user.user.name %>

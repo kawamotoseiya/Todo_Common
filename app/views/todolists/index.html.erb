@@ -1,11 +1,12 @@
 <div class="container">
 	<div class="row">
 		<h1><%= @group.name %></h1>
-			<%= link_to "メンバー一覧", group_group_users_path(@group.id), class: "btn btn-info" %>
+			<div><%= link_to "メンバー一覧", group_group_users_path(@group.id), class: "btn btn-info" %>
 		<% if @group.user_id == current_user.id %>
 			<%= link_to "グループ編集", edit_group_path(@group.id), class: "btn btn-success" %>
 			<%= link_to "グループ削除", group_path(@group.id), method: :delete, data: {confirm: "グループを削除してもよろしいですか？"}, class: "btn btn-danger" %>
 		<% end %>
+	</div>
 		<div class="todolists-new">
 			<%= link_to "＋TODOリスト作成",new_group_todolist_path(@group.id),class: "btn btn-default" %>
 		</div>
@@ -15,23 +16,22 @@
 		<table class="table table-hover">
 			<% @todolists.each do |todolist| %>
 			<tr>
-				<td class="col-xs-7"><%= todolist.head %></td>
+				<td class="col-md-7"><%= link_to todolist.head, group_todolist_path(@group.id, todolist.id), style: "color: black;" %></td>
 				<% if todolist.checked_by?(current_user)%>
-				<td class="col-xs-1"><%= link_to group_todolist_checks_path(@group.id, todolist.id), method: :delete do %>
-					<i class="fas fa-american-sign-language-interpreting fa-fw fa-2x" zc style="color: red;" ></i>
+				<td class="col-md-2"><%= link_to group_todolist_checks_path(@group.id, todolist.id), method: :delete do %>
+					<i class="fas fa-american-sign-language-interpreting fa-fw fa-2x" style="color: red;" ></i>
 					<% end %>
-					<%= todolist.checks.count %>人
+					<%= todolist.checks.count %>人協力
 				</td>
 				<% else %>
-				<td class="col-xs-1"><%= link_to group_todolist_checks_path(@group.id, todolist.id), method: :post do %>
+				<td class="col-md-2"><%= link_to group_todolist_checks_path(@group.id, todolist.id), method: :post do %>
 					<i class="fas fa-american-sign-language-interpreting fa-fw fa-2x" aria-hidden="true"></i><% end %>
-					<%= todolist.checks.count %>人
+					<%= todolist.checks.count %>人協力
 				</td>
 				<% end %>
-				<td class="col-xs-1"><%= link_to "詳細", group_todolist_path(@group.id, todolist.id), class: "btn btn-info" %>
-				</td>
-				<td class="col-xs-1"><%= link_to "編集", edit_group_todolist_path(@group.id, todolist.id), class: "btn btn-success" %></td>
-				<td class="col-xs-1"><%= link_to "削除", group_todolist_path(@group.id, todolist.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %></td>
+				<td class="col-md-2"><%= link_to "詳細", group_todolist_path(@group.id, todolist.id), class: "btn btn-info" %>
+				<%= link_to "編集", edit_group_todolist_path(@group.id, todolist.id), class: "btn btn-success" %>
+				<%= link_to "削除", group_todolist_path(@group.id, todolist.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %></td>
 			</tr>
 			<% end %>
 		</table>
@@ -45,6 +45,6 @@
 	</div>
 	<% end %>
 	<div class="row">
-		<%= link_to "戻る", groups_path, class: "btn btn-primary text-center" %>
+		<%= link_to "戻る", groups_path, class: "btn btn-primary" %>
 	</div>
 </div>

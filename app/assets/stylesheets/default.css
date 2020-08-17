@@ -8,10 +8,10 @@ header {
 main{
 	width: 100%;
 	height: 800px;
-	background-image: url(cropwashitexture07.jpg)
+	background-image: image-url(cropwashitexture07.jpg)
 }
 .top-visual{
-	background-image: url(jan-kahanek-g3O5ZtRk2E4-unsplash.jpg);
+	background-image: image-url(jan-kahanek-g3O5ZtRk2E4-unsplash.jpg);
 	width: 100%;
 	height: 800px;
 	background-size: cover;
@@ -41,6 +41,13 @@ main{
 .group_new{
 	position: relative;
 	top: 30px;
+}
+.group-image{
+	position: relative;
+	right: 30px;
+}
+.group-introduce{
+	left: 10px;
 }
 .todolists-new{
 	text-align: right;

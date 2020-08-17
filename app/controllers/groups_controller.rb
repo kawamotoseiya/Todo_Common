@@ -16,7 +16,7 @@ class GroupsController < ApplicationController
 	end
 	def index
 		@group = Group.new
-		@group_users = GroupUser.where(user_id: current_user.id, join_status: '参加中')
+		@group_users = GroupUser.where(user_id: current_user.id, join_status: '参加中' )
 	end
 	def edit
 		@group = Group.find(params[:id])

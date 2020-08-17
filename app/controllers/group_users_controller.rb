@@ -2,6 +2,7 @@ class GroupUsersController < ApplicationController
 	def index
 		@group = Group.find(params[:group_id])
 		@group_users = GroupUser.where(group_id: @group.id)
+
 	end
 	def create
 		group = Group.find(params[:group_id])
@@ -11,7 +12,7 @@ class GroupUsersController < ApplicationController
 		group_user.permit_status = '拒否'
 		group_user.join_status = '参加申請中'
 		group_user.save!
-		redirect_to groups_path
+		redirect_back(fallback_location: root_path)
 	end
 	def update
 		group = Group.find(params[:group_id])

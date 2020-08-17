@@ -3,20 +3,20 @@
 	<div class="row">
 		<%= form_for @todolist, url: group_todolist_path do |f| %>
 		<div class="todolist_edit-form">
-			<div class="col-xs-12">
-		<%= f.label :表題, class: "col-xs-1" %>
-		<%= f.text_field :head, class: "col-xs-6" %>
+			<div class="col-sm-12">
+		<%= f.label :表題, class: "col-sm-1" %>
+		<%= f.text_field :head, class: "col-sm-7" %>
 			</div>
 		</div>
 		<div class="todolist_edit-form">
-			<div class="col-xs-12">
-		<%= f.label :内容, class: "col-xs-1" %>
-		<%= f.text_area :body, class: "col-xs-6",style: "height: 200px;" %>
+			<div class="col-sm-12">
+		<%= f.label :内容, class: "col-sm-1" %>
+		<%= f.text_area :body, class: "col-sm-7",style: "height: 200px;" %>
 			</div>
 		</div>
 		<div class="todolist_edit-form">
-			<div class="col-xs-12"><br>
-				<div class="col-xs-1"></div>
+			<div class="col-sm-12"><br>
+				<div class="col-sm-1"></div>
 		<%= f.submit "更新", class: "btn btn-success" %>
 			</div>
 		</div>

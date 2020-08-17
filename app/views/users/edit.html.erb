@@ -2,12 +2,12 @@
 	<h2>ユーザー編集</h2>
 		<%= form_for @user do |f| %>
 		<div class="row">
-		<div class="col-xs-4">
+		<div class="col-md-4">
 			<%= attachment_image_tag @user, :image, class: "img-square", fallback: "no_image.jpg", size:"200x200" %>
 			<%= f.label :イメージ画像 %>
 			<%= f.attachment_field :image %>
 		</div>
-		<div class="col-xs-8">
+		<div class="col-md-8">
 			<div>
 			<%= f.label :ユーザーネーム %>
 			<%= f.text_field :name %>
