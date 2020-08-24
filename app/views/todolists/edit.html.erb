@@ -2,27 +2,49 @@
 	<h3>編集</h3>
 	<div class="row">
 		<%= form_for @todolist, url: group_todolist_path do |f| %>
+				<% if @todolist.errors.any? %>
+			  		<h2><%= pluralize(@todolist.errors.count,"つエラーがあります") %></h2>
+			  		<% @todolist.errors.full_messages.each do |message| %>
+			  		<li><%= message %></li>
+			   		<% end %>
+				<% end %>
 		<div class="todolist_edit-form">
 			<div class="col-sm-12">
-		<%= f.label :表題, class: "col-sm-1" %>
-		<%= f.text_field :head, class: "col-sm-7" %>
+				<%= f.label :日付, class: "col-sm-1" %>
+				<%= f.date_field :day, class: "col-sm-6" %>
 			</div>
 		</div>
 		<div class="todolist_edit-form">
 			<div class="col-sm-12">
-		<%= f.label :内容, class: "col-sm-1" %>
-		<%= f.text_area :body, class: "col-sm-7",style: "height: 200px;" %>
+				<%= f.label :タイトル, class: "col-sm-1" %>
+				<%= f.text_field :head, class: "col-sm-6" %>
+				<a class="col-xs-1" id="todolist-edit-button" style="color: black; font-size: 21px; cursor: pointer;">＋</a>
+			</div>
+		</div>
+		<div class="todolist_edit-form" id="todolist-edit">
+			<div class="col-sm-12">
+				<%= f.label :内容, class: "col-sm-1" %>
+				<%= f.text_area :body, class: "col-sm-6",style: "height: 200px;" %>
 			</div>
 		</div>
 		<div class="todolist_edit-form">
 			<div class="col-sm-12"><br>
 				<div class="col-sm-1"></div>
-		<%= f.submit "更新", class: "btn btn-success" %>
+				<%= f.submit "更新", class: "btn btn-default" %>
 			</div>
 		</div>
 		<% end %>
 	</div>
 	<div class="row">
-		<%= link_to "戻る", group_todolists_path(@group.id), class: "btn btn-primary" %>
+		<%= link_to "戻る", group_todolists_path(@group.id), class: "btn btn-lg" %>
 	</div>
 </div>
+<script>
+	$(function() {
+		$('#todolist-edit').hide();
+		$('#todolist-edit-button').on('click', function(){
+			$('#todolist-edit').toggleClass('active');
+			$('#todolist-edit').slideToggle();
+		});
+	});
+</script>

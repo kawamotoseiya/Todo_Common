@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+      group: "グループ"
+      todolist: "TODOリスト"
+      comment: "コメント"
+    attributes:
+      user:
+        name: "名前"
+        email: "Eメールアドレス"
+      group:
+        name: "グループ名"
+      todoList:
+        head: "表題"
+        body: "内容"
+      comment:
+        comment: "コメント"

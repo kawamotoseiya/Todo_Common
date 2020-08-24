@@ -1,15 +1,34 @@
+<div class="anime">
+	<div id="white-line"></div>
+</div>
 <div class="top-visual">
 	<div class="row">
 		<h1 class="top-title">welcome to TodoCommon</h1>
 	</div>
+	<br>
 	<div class="row">
-		<p class="top-text">グループを作成し、TODOリストを作成するサイトです。</p>
+		<p class="top-text">グループを作成し、その中でTODOリストを作成するサイトです。</p>
 		<p class="top-text">自分の作成したグループのIDを伝えることでTODOリストを共有することができます。</p>
 		<p class="top-text">一人だけでなく仲間と一緒に取り組むことで人生を充実させよう。</p>
 	</div>
 	<div class="row">
 		<p class="top-devise">
 			<%=link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
-			<%=link_to "Sign up", new_user_registration_path, class: "btn btn-success" %></p>
+			<%=link_to "Sign up", new_user_registration_path, class: "btn btn-success" %>
+		</p>
 	</div>
 </div>
+<script>
+	$(function(){
+$(".top-visual").css("display", "block");
+setTimeout(function() {
+    $('.anime').fadeOut();
+    }, 3000);
+});
+	$(function() {
+    winW = $(window).width();
+    $('#white-line').animate({
+        width: winW
+    }, 3000);
+});
+</script>

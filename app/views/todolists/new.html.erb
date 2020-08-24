@@ -2,13 +2,26 @@
 	<h2>todolist作成</h2>
 	<div class="row">
 		<%= form_for @todolist,url: group_todolists_path do |f| %>
+			<% if @todolist.errors.any? %>
+			  	<h2><%= pluralize(@todolist.errors.count,"つエラーがあります") %></h2>
+			  	<% @todolist.errors.full_messages.each do |message| %>
+			  		<li><%= message %></li>
+			   	<% end %>
+			<% end %>
 		<div class="todolist_new-form">
 			<div class="col-xs-12">
-				<%= f.label :表題, class: "col-xs-1" %>
-				<%= f.text_field :head, class: "col-xs-6" %>
+				<%= f.label :日付, class: "col-xs-1" %>
+				<%= f.date_field :day, class: "col-xs-6" %>
 			</div>
 		</div>
 		<div class="todolist_new-form">
+			<div class="col-xs-12">
+				<%= f.label :タイトル, class: "col-xs-1" %>
+				<%= f.text_field :head, class: "col-xs-6" %>
+				<a class="col-xs-1" id="todolist-new-button" style="color: black; font-size: 21px; cursor: pointer;">＋</a>
+			</div>
+		</div>
+		<div class="todolist_new-form" id="todolist-new">
 			<div class="col-xs-12">
 				<%= f.label :内容, class: "col-xs-1" %>
 				<%= f.text_area :body, class: "col-xs-6",style: "height: 200px;" %>
@@ -17,12 +30,21 @@
 		<div class="todolist_new-form">
 			<div class="col-xs-12"><br>
 				<div class="col-xs-1"></div>
-				<%= f.submit "追加", class: "btn btn-success" %>
+				<%= f.submit "作成", class: "btn btn-default" %>
 			</div>
 		</div>
 		<% end %>
 	</div>
 	<div class="row">
-		<%= link_to "戻る", group_todolists_path(@group.id), class: "btn btn-primary" %>
+		<%= link_to "戻る", group_todolists_path(@group.id), class: "btn btn-lg" %>
 	</div>
 </div>
+<script>
+	$(function() {
+		$('#todolist-new').hide();
+		$('#todolist-new-button').on('click', function(){
+			$('#todolist-new').toggleClass('active');
+			$('#todolist-new').slideToggle();
+		});
+	});
+</script>

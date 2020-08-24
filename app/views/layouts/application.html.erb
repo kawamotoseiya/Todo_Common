@@ -11,14 +11,16 @@
 
   <body>
     <header class="navbar navbar-inverse" style="margin-bottom: 0;">
-    </style>
       <div class="container">
         <nav class="nav navbar-nav navbar-left">
           <h1 class="nav-title">TodoCommon</h1>
         </nav>
         <nav class="nav navbar-nav navbar-right" style="margin-top: 25px; ">
           <% if signed_in? %>
-          <li><%= link_to "検索", search_search_form_path, class: "fab fa-sistrix" %></li>
+          <li id="search_form">
+             <%= render partial: 'search/search-form' %>
+          </li>
+          <li><a class="fab fa-sistrix" id="search-button" style="cursor: pointer;">検索</a></li>
           <li><%= link_to 'グループ一覧', groups_path, class: "fas fa-users" %></li>
           <li><%= link_to 'ユーザー情報編集', edit_user_path(current_user), class: "far fa-user" %></li>
           <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt" %></li>
@@ -31,13 +33,16 @@
       </div>
     </header>
     <main>
-    <%= yield %>
-  </main>
-  <footer>
-    <div class="container">
-      <div class="footer-box">
-        <p class="footer-text">@2020 TodoCommon</p>
-        <div class="footer-social">
+      <%= yield %>
+    </main>
+    <footer>
+      <div class="container">
+        <div class="footer-box">
+          <p class="footer-inquiry">
+            <%= link_to "お問い合わせ",inquiry_path, style: "color: gray;" %>
+          </p>
+          <p class="footer-text">@2020 TodoCommon</p>
+          <div class="footer-social">
 
             <a href="#">
             <i class="fab fa-instagram-square fa-fw fa-2x icon-instagram" style="color: gray;"></i></a>
@@ -48,9 +53,18 @@
 
             <a href="#">
             <i class="fab fa-twitter fa-fw fa-2x icon-twitter" style="color: gray;"></i></a>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+    <script>
+      $(function() {
+        $('#search_form').hide();
+        $('#search-button').on('click', function(){
+          $(this).toggleClass('active');
+          $('#search_form').fadeToggle();
+        });
+      });
+  </script>
   </body>
 </html>

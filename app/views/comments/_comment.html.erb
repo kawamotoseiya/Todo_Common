@@ -1,0 +1,16 @@
+<table class="table table-hover comment-table" id="comments_area">
+	<% comments.each do |comment| %>
+		<tr>
+			<td><%= attachment_image_tag comment.user, :image, fallback: "no_image.jpg", class:"comment-image", size: "40x40" %><%= comment.user.name %></td>
+			<td><h5><%= comment.comment %></h5></td>
+			<td><h5><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></h5></td>
+		<% if comment.user == current_user %>
+			<td><%= link_to group_todolist_comment_path(@group.id, @todolist.id, comment.id), method: :delete, remote: true do %>
+			<i class="fas fa-trash fa-lg" style="color: gray;"></i></td>
+		<% end %>
+		<% else %>
+			<td></td>
+		<% end %>
+		</tr>
+	<% end %>
+</table>

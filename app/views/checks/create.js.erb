@@ -1,0 +1,1 @@
+$("#check-<%= @todolist.id %>").html('<%= escape_javascript(render("checks/check", group: @group, todolist: @todolist)) %>');

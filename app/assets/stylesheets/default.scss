@@ -1,3 +1,28 @@
+*{
+	margin: 0;
+}
+html {
+    height: 100%;
+}
+body {
+	height: 100%;
+    margin: 0;
+    padding-top: 100％;
+}
+.anime {
+ width: 100vw;
+ height: 100vh;
+ background-color: black;
+ position: relative;
+}
+#white-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 5px;
+    background: white;
+}
 header {
     margin: 0;
 }
@@ -7,15 +32,23 @@ header {
 }
 main{
 	width: 100%;
-	height: 800px;
-	background-image: image-url("cropwashitexture07.jpg")
-}
-.top-visual{
-	background-image: image-url("jan-kahanek-g3O5ZtRk2E4-unsplash.jpg");
-	width: 100%;
-	height: 800px;
+	height: 82vh;
+	overflow: scroll;
+	background-image: image-url("cropwashitexture07.jpg");
 	background-size: cover;
 	background-position: center;
+	background-cover: center;
+}
+.btn-lg{
+	color: black;
+}
+.top-visual{
+	background-image: image-url("cropwashitexture07.jpg");
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	background-cover: center;
 }
 .top-title{
 	position: relative;
@@ -38,16 +71,12 @@ main{
 .table-hover{
 	background-color: #F1F1F1;
 }
-.group_new{
-	position: relative;
-	top: 30px;
+.group-box{
+	margin-bottom: 10px;
 }
 .group-image{
 	position: relative;
 	right: 30px;
-}
-.group-introduce{
-	left: 10px;
 }
 .todolists-new{
 	text-align: right;
@@ -65,37 +94,86 @@ main{
 .todolist_edit-form{
 	padding: 20px;
 }
-.comment-title{
+.todolist-title{
+	text-align: center;
+}
+.todolist-day{
+	text-align: center;
+}
+.todolist-body{
+	text-align: center;
+}
+
+.comment-form{
 	position: relative;
 	top: 30px;
-}
-.comment-form{
 	text-align: center;
 }
 footer{
 	width: 100%;
 	height: 10%;
 	background-color: black;
-	position: absolute;
 	bottom: 0;
+	position: fixed;
 }
 .footer-text{
 	text-align: center;
 	color: gray;
 	position: relative;
-	top: 35px;
+	top: 20px;
 }
 .footer-social{
 	text-align: right;
 	position: relative;
-	bottom: 10px;
+	bottom: 30px;
+}
+.footer-inquiry{
+	text-align: left;
+	position: relative;
+	top: 15px;
 }
 .fa-instagram-square{
 	padding-right: 10px;
+	bottom: 10px;
 }
 .fa-facebook{
 	padding: 10px;
 }
 .icon-twitter{
 	padding-left: 10px;
+}
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+@media screen and (max-width:1199px) {
+	.group-introduce{
+		position: relative;
+		left: 15px;
+	}
+}
+@media screen and (max-width:991px) {
+	main{
+	height: 82%;
+	}
+	.group-box{
+	display: flex;
+	float: left;
+	width:33%;
+	}
+	.group-image{
+	position: relative;
+	left: 3px;
+	}
+}
+@media screen and (max-width:767px) {
+	main{
+	height: 64%;
+	}
+	.group-box{
+	display: flex;
+	float: left;
+	width:50%;
+	}
 }

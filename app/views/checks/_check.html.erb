@@ -1,0 +1,11 @@
+<% if todolist.checked_by?(current_user)%>
+	<%= link_to group_todolist_checks_path(group.id, todolist.id), method: :delete, remote: true do %>
+			<i class="fas fa-american-sign-language-interpreting fa-fw fa-2x" style="color: red;" ></i>
+	<% end %>
+		<%= todolist.checks.count %>人参加
+<% else %>
+	<%= link_to group_todolist_checks_path(group.id, todolist.id), method: :post, remote: true do %>
+			<i class="fas fa-american-sign-language-interpreting fa-fw fa-2x" aria-hidden="true"></i>
+	<% end %>
+			<%= todolist.checks.count %>人参加
+<% end %>

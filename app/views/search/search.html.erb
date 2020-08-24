@@ -1,8 +1,8 @@
 <div class="container">
 	<h3>検索結果</h3>
+	<% if @group.group_key_flag == "有効" %>
 	<div class="row">
 		<table class="table table-striped">
-			<% if @group.group_key_flag == "有効" %>
 			<tr>
 				<th>グループID</th>
 				<th>画像</th>
@@ -16,7 +16,11 @@
 				<td><%= @group.user.name %></td>
 				<td><%= @group.name %></td>
 				<% if @group.group_users.include?(@group_user) %>
-				<td><%= @group_user.join_status %></td>
+					<% if @group_user.join_status == "参加中" %>
+					<td><%= link_to "参加中", group_todolists_path(@group.id), class: "btn btn-default" %></td>
+					<% else %>
+					<td><%= @group_user.join_status %></td>
+					<% end %>
 				<% else %>
 				<td>
 					<%= link_to "参加する",group_group_users_path(@group.id), method: :post, class: "btn btn-default" %>
@@ -35,6 +39,6 @@
 	</div>
 	<% end %>
 	<div class="row">
-		<%= link_to "戻る", groups_path, class: "btn btn-primary text-center"%>
+		<%= link_to "戻る", groups_path, class: "btn btn-lg text-center"%>
 	</div>
 </div>

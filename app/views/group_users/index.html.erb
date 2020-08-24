@@ -6,36 +6,38 @@
 		<table class="table table-hover">
 			<% @group_users.each do |group_user| %>
 			<tr>
-				<td>
+				<td class="col-md-2">
 					<%= attachment_image_tag group_user.user, :image, class: "img-square", fallback: "no_image.jpg", size:"50x50" %>
 				</td>
-				<td>
+				<td class="col-md-6">
 					<%= group_user.user.name %>
 				</td>
 				<% if @group.user_id == current_user.id %>
-				<% if group_user.user_id == current_user.id %>
-				<td>
-					<%= link_to "グループを削除する", group_path(@group.id), method: :delete, data: {confirm: "グループを削除してもよろしいですか？"}, class: "btn btn-danger" %>
-				</td>
-				<% elsif group_user.join_status == "参加申請中" && group_user.permit_status == "拒否" %>
-				<td>
-					<%= link_to "許可", group_group_user_path(@group.id, group_user.id), method: :put, class: "btn btn-success" %>
-					<%= link_to "拒否", group_group_user_path(@group.id, group_user.id), method: :delete, data: {confirm: "参加を拒否しますか？"}, class: "btn btn-danger" %>
-				</td>
-				<% else %>
-				<td></td>
-				<% end %>
-				<% elsif group_user.user_id == current_user.id && @group.user_id != current_user.id %>
-				<td>
-					<%= link_to "グループから抜ける", group_group_user_path(@group.id, group_user.id), method: :delete, data: {confirm: "グループから抜けてよろしいですか？"}, class: "btn btn-danger" %></td>
+					<% if group_user.user_id == current_user.id %>
+						<td>
+							<%= link_to "グループを削除する", group_path(@group.id), method: :delete, data: {confirm: "グループを削除してもよろしいですか？"}, class: "btn btn-lg" %>
+						</td>
+					<% elsif group_user.join_status == "参加申請中" && group_user.permit_status == "拒否" %>
+						<td>
+							<%= link_to "許可", group_group_user_path(@group.id, group_user.id), method: :put, class: "btn btn-default" %>
+							<%= link_to "拒否", group_group_user_path(@group.id, group_user.id), method: :delete, data: {confirm: "参加を拒否しますか？"}, class: "btn btn-default" %>
+						</td>
+					<% else %>
+						<td></td>
 					<% end %>
+				<% elsif group_user.user_id == current_user.id && @group.user_id != current_user.id %>
+						<td>
+							<%= link_to "グループから抜ける", group_group_user_path(@group.id, group_user.id), method: :delete, data: {confirm: "グループから抜けてよろしいですか？"}, class: "btn btn-lg" %>
+						</td>
 				<% else %>
-				<td></td>
-				</tr>
+					<td></td>
 				<% end %>
-			</tbody>
+			</tr>
+			<% end %>
 		</table>
 		<div class="row">
-			<%= link_to "戻る", group_todolists_path(@group.id), class: "btn btn-primary" %>
+			<%= link_to "戻る", group_todolists_path(@group.id), class: "btn btn-lg" %>
 		</div>
 	</div>
+	<%= paginate @group_users %>
+</div>

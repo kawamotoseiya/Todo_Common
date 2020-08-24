@@ -1,0 +1,6 @@
+<div>
+	<%= form_tag group_search_search_date_path(@group), :method => 'get' do %>
+		<%= date_field_tag 'search[date]',"",class: "search_date-tag" %>
+    	<%= submit_tag '検索', style: "background-color: white;" %>
+    <% end %>
+</div>

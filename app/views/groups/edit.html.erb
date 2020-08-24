@@ -2,16 +2,22 @@
 	<h3>グループ編集</h3>
 	<div class="row">
 		<%= form_for @group, url: group_path do |f| %>
-		<%= f.label :グループ名 %>
-		<%= f.text_field :name %>
-		<%= f.label :　グループ検索 %>
-		<label><%= f.radio_button :group_key_flag, "有効" %> 有効 </label>
-		<label><%= f.radio_button :group_key_flag, "無効" %> 無効</label>
-		<%= f.label :　%>
-		<%= f.submit "更新", class: "btn btn-success" %>
+			<% if @group.errors.any? %>
+			  	<h2><%= pluralize(@group.errors.count,"つエラーがあります") %></h2>
+			  	<% @group.errors.full_messages.each do |message| %>
+			  		<li><%= message %></li>
+			   	<% end %>
+			<% end %>
+			<%= f.label :グループ名 %>
+			<%= f.text_field :name %>
+			<%= f.label :　グループ検索 %>
+			<label><%= f.radio_button :group_key_flag, "有効" %> 有効 </label>
+			<label><%= f.radio_button :group_key_flag, "無効" %> 無効</label>
+			<%= f.label :　%>
+			<%= f.submit "更新", class: "btn btn-default" %>
 		<% end %>
 	</div>
 	<div class="row">
-		<%= link_to "戻る", group_todolists_path(@group.id),class: "btn btn-primary" %>
+		<%= link_to "戻る", group_todolists_path(@group.id),class: "btn btn-lg" %>
 	</div>
 </div>

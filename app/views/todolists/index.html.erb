@@ -1,50 +1,91 @@
 <div class="container">
+	<% if flash[:todolist] %>
+      <div class="flash">
+        <%= flash[:todolist] %>
+      </div>
+    <% end %>
+    <% if flash[:group_update] %>
+      <div class="flash">
+        <%= flash[:group_update] %>
+      </div>
+    <% end %>
+    <h1><%= @group.name %></h1>
+    <%= render partial: 'search/search-date' %>
+    <br>
 	<div class="row">
-		<h1><%= @group.name %></h1>
-			<div><%= link_to "メンバー一覧", group_group_users_path(@group.id), class: "btn btn-info" %>
-		<% if @group.user_id == current_user.id %>
-			<%= link_to "グループ編集", edit_group_path(@group.id), class: "btn btn-success" %>
-			<%= link_to "グループ削除", group_path(@group.id), method: :delete, data: {confirm: "グループを削除してもよろしいですか？"}, class: "btn btn-danger" %>
-		<% end %>
-	</div>
-		<div class="todolists-new">
-			<%= link_to "＋TODOリスト作成",new_group_todolist_path(@group.id),class: "btn btn-default" %>
-		</div>
+		<%= link_to "メンバー一覧", group_group_users_path(@group.id), class: "btn btn-default col-md-2" %>
+			<% if @group.user_id == current_user.id %>
+				<%= link_to "グループ編集", edit_group_path(@group.id), class: "btn btn-default col-md-2" %>
+				<%= link_to "グループ削除", group_path(@group.id), method: :delete, data: {confirm: "グループを削除してもよろしいですか？"}, class: "btn btn-default col-md-2" %>
+				<div class="col-md-4"></div>
+			<% else %>
+				<div class="col-md-8"></div>
+			<% end %>
+				<%= link_to "＋TODOリスト",new_group_todolist_path(@group.id),class: "btn btn-default col-md-2" %>
 	</div>
 	<% if @todolists.exists? %>
 	<div class="row">
 		<table class="table table-hover">
-			<% @todolists.each do |todolist| %>
+			<% @todolists.each_with_index do |todolist, i| %>
 			<tr>
-				<td class="col-md-7"><%= link_to todolist.head, group_todolist_path(@group.id, todolist.id), style: "color: black;" %></td>
-				<% if todolist.checked_by?(current_user)%>
-				<td class="col-md-2"><%= link_to group_todolist_checks_path(@group.id, todolist.id), method: :delete do %>
-					<i class="fas fa-american-sign-language-interpreting fa-fw fa-2x" style="color: red;" ></i>
+				<td class="col-md-1" data-todoid=<%= i %>><button>+</button></td>
+				<td class="col-md-5"><%= link_to todolist.head, group_todolist_path(@group.id, todolist.id), style: "color: black;" %></td>
+				<% unless todolist.day.nil? %>
+					<% if (todolist.day-@today).numerator < 0 %>
+						<td class="col-md-1"><h5><%= ((todolist.day-@today).numerator)*(-1) %>日超過</h5></td>
+					<% elsif (todolist.day-@today).numerator == 0 %>
+						<td class="col-md-1"><h5>本日</h5></td>
+					<% elsif (todolist.day-@today).numerator > 0 %>
+						<td class="col-md-1"><h5>あと<%= (todolist.day-@today).numerator %>日</h5></td>
 					<% end %>
-					<%= todolist.checks.count %>人協力
-				</td>
 				<% else %>
-				<td class="col-md-2"><%= link_to group_todolist_checks_path(@group.id, todolist.id), method: :post do %>
-					<i class="fas fa-american-sign-language-interpreting fa-fw fa-2x" aria-hidden="true"></i><% end %>
-					<%= todolist.checks.count %>人協力
-				</td>
+					<td class="col-md-1"></td>
 				<% end %>
-				<td class="col-md-2"><%= link_to "詳細", group_todolist_path(@group.id, todolist.id), class: "btn btn-info" %>
-				<%= link_to "編集", edit_group_todolist_path(@group.id, todolist.id), class: "btn btn-success" %>
-				<%= link_to "削除", group_todolist_path(@group.id, todolist.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %></td>
+					<td class="col-md-1" id="check-<%= todolist.id %>">
+					<%= render partial: 'checks/check', locals: { group: @group, todolist: todolist} %>
+					</td>
+					<td class="col-md-1 comment-count"><h5>コメント数<%= todolist.comments.count %></h5></td>
+					<td class="col-md-2"><%= link_to "詳細", group_todolist_path(@group.id, todolist.id), class: "btn btn-default" %>
+					<%= link_to "編集", edit_group_todolist_path(@group.id, todolist.id), class: "btn btn-default" %>
+					<%= link_to "削除", group_todolist_path(@group.id, todolist.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-default" %>
+					</td>
+			</tr>
+			<tr class="todolist_body todobody<%= i %>">
+				<td class="todolist_body todobody<%= i %>" colspan="6"><%= simple_format(todolist.body) %></td>
 			</tr>
 			<% end %>
+			<%= paginate @todolists %>
 		</table>
 	</div>
 	<% else %>
-	<div class="row">
-		<div class="todolists-text">
-			<i class="fas fa-book-open" style="font-size: 100px; color: gray;" ></i>
+		<div class="row">
+			<div class="todolists-text">
+				<i class="fas fa-book-open" style="font-size: 100px; color: gray;" ></i>
+			</div>
+			<h3 class="todolists-text" style="color: gray;">
+				＋TODOリストボタンを押して<br>
+				新しいTODOリストを作成しましょう!</h3>
 		</div>
-		<h3 class="todolists-text" style="color: gray;">新しいTODOリストを作成しましょう!</h3>
-	</div>
 	<% end %>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 	<div class="row">
-		<%= link_to "戻る", groups_path, class: "btn btn-primary" %>
+		<%= link_to "戻る", groups_path, class: "btn btn-lg" %>
 	</div>
 </div>
+	<script>
+		$(function() {
+			$('.todolist_body').hide();
+			$('button').on('click', function(){
+				var todoid = $(this).parent().data().todoid;
+				$('.todobody' + todoid).fadeToggle();
+			});
+		});
+	</script>

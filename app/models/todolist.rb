@@ -6,7 +6,6 @@ class Todolist < ApplicationRecord
 	has_many :checks, dependent: :destroy
 
 	validates :head, presence: true
-	validates :body, presence: true
 
 	def checked_by?(user)
     checks.where(user_id: user.id).exists?

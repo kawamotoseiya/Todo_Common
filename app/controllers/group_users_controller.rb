@@ -1,8 +1,20 @@
 class GroupUsersController < ApplicationController
+	before_action :authenticate_user!
 	def index
-		@group = Group.find(params[:group_id])
-		@group_users = GroupUser.where(group_id: @group.id)
-
+		if Group.exists?(id: params[:group_id])
+			@group = Group.find(params[:group_id])
+			@group_users = GroupUser.where(group_id: @group.id).page(params[:page])
+			group_user = GroupUser.find_by(group_id: @group.id, user_id: current_user.id)
+			if group_user.nil?
+			redirect_to groups_path
+			else
+				if group_user.permit_status != "許可"
+				redirect_to groups_path
+				end
+			end
+		else
+		redirect_to groups_path
+		end
 	end
 	def create
 		group = Group.find(params[:group_id])

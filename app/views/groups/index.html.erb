@@ -1,36 +1,66 @@
 <div class="container">
+	<% if flash[:group_create] %>
+      <div class="flash">
+        <%= flash[:group_create] %>
+      </div>
+    <% end %>
+    <% if flash[:user] %>
+      <div class="flash">
+        <%= flash[:user] %>
+      </div>
+    <% end %>
 	<div class="row">
-		<h1 class="col-xs-9">グループ一覧</h1>
-		<div class="col-xs-3">
-			<div class="group_new">
-				<%= link_to "グループ新規作成", new_group_path, class: "btn btn-default" %>
-			</div>
+		<h2 class="col-md-3">グループ一覧</h2>
+		<div class="col-md-7"><br>
+		<span id="group-new"><%= render partial: 'groups/new' %>
+		</span>
+		</div>
+		<div class="col-md-2"><br>
+			<a class= "btn btn-default" id="group-new-button">＋グループ</a>
 		</div>
 	</div>
 	<% if @group_users.exists? %>
-	<div class="row">
-		<% @group_users.each do |group_user| %>
-		<div class="col-md-4" style="border: 1px solid; margin-left: 3px;">
-			<div class="col-md-5">
-				<%= attachment_image_tag group_user.group.user, :image, :fill, 150, 140, fallback:  "no_image.jpg",size:"150x140", class: "group-image" %>
-			</div>
-			<div class="col-md-7 group-introduce"><br>
-				<div>作成者：<%= group_user.group.user.name %></div>
-				<div>グループID：<%= group_user.group.id %></div>
-				<div>グループ名：<%= group_user.group.name %></div>
-				<div>参加数：<%= group_user.group.group_users.count %>人</div>
-				<div><%= link_to "詳細", group_todolists_path(group_user.group.id),class: "btn btn-info" %>
+		<div class="row">
+			<% @group_users.each do |group_user| %>
+			<div class="col-md-4 group-box">
+				<div class="clearfix">
+					<div class="col-md-12" style="border: 1px solid;">
+						<div class="col-md-4">
+							<%= attachment_image_tag group_user.group.user, :image, :fill, 120, 140, fallback:  "no_image.jpg",size:"120x140", class: "group-image" %>
+						</div>
+						<div class="col-md-8 group-introduce"><br>
+							<div>作成者：<%= group_user.group.user.name.truncate(10) %>
+							</div>
+							<div>グループID：<%= group_user.group.id %>
+							</div>
+							<div>グループ：<%= group_user.group.name.truncate(10) %>
+							</div>
+							<div>参加数：<%= group_user.group.group_users.count %>人
+							</div>
+							<div><%= link_to "詳細", group_todolists_path(group_user.group.id),class: "btn btn-default" %></div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
 		<% end %>
+		<%= paginate @group_users %>
 		<% else %>
 		<div>
 			<div class="text-center">
 				<i class="fas fa-hands-helping" style="font-size: 100px; color: gray;" ></i>
 			</div>
-			<h3 class="text-center" style="color: gray;">新しいグループを作成しましょう！</h3>
+			<h3 class="text-center" style="color: gray;">＋グループボタンを押して<br>
+			新しいグループを作成しましょう！</h3>
 		</div>
 		<% end %>
 	</div>
 </div>
+<script>
+  $(function() {
+  $('#group-new').hide();
+  $('#group-new-button').on('click', function(){
+    $('#group-new').toggleClass('active');
+    $('#group-new').fadeToggle();
+  });
+});
+</script>

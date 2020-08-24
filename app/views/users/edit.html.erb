@@ -1,29 +1,47 @@
 <div class="container">
 	<h2>ユーザー編集</h2>
 		<%= form_for @user do |f| %>
-		<div class="row">
-		<div class="col-md-4">
-			<%= attachment_image_tag @user, :image, class: "img-square", fallback: "no_image.jpg", size:"200x200" %>
-			<%= f.label :イメージ画像 %>
-			<%= f.attachment_field :image %>
-		</div>
-		<div class="col-md-8">
-			<div>
-			<%= f.label :ユーザーネーム %>
-			<%= f.text_field :name %>
-			</div><br>
-			<div>
-				<%= f.label :メールアドレス %>
-				<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+			<% if @user.errors.any? %>
+			  	<h2><%= pluralize(@user.errors.count,"つエラーがあります") %></h2>
+			  	<% @user.errors.full_messages.each do |message| %>
+			  		<li><%= message %></li>
+			   	<% end %>
+			<% end %>
+			<div class="row profile">
+				<div class="col-md-4">
+					<%= attachment_image_tag @user, :image, class: "img-square", fallback: "no_image.jpg", size:"200x200" %>
+					<%= f.label :イメージ画像 %>
+					<%= f.attachment_field :image %>
+				</div>
+				<div class="col-md-8">
+					<div>
+						<%= f.label :ユーザーネーム %>
+						<%= f.text_field :name %>
+					</div>
+					<br>
+					<div>
+						<%= f.label :メールアドレス %>
+						<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-6"></div>
-			<%= f.submit "ユーザー情報更新" ,class: "btn btn-success"%>
-		</div>
+	<script>
+		$(function(){
+    		$('.profile').on('change', function (e) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+				$(".image").attr('src', e.target.result);
+				}
+    			reader.readAsDataURL(e.target.files[0]);
+			});
+		});
+	</script>
+<div class="row">
+	<div class="col-xs-6"></div>
+		<%= f.submit "ユーザー情報更新" ,class: "btn btn-default"%>
+</div>
 		<% end %>
 	<div class="row">
-		<%= link_to "戻る", groups_path,class: "btn btn-primary" %>
+		<%= link_to "戻る", groups_path,class: "btn btn-lg" %>
 	</div>
 </div>
