@@ -26,6 +26,16 @@ describe 'ユーザーのテスト' do
         find('#group-new-button').click
         expect(page).to have_content 'エラー'
       end
+      it "グループの削除" do
+        find('#group-new-button').click
+        fill_in 'group[name]', with: group.name
+        choose "有効"
+        click_on 'グループ新規作成'
+        click_on '詳細'
+        click_on 'グループ削除'
+        page.driver.browser.switch_to.alert.accept
+        expect(current_path).to eq('/groups')
+      end
     end
   end
 end

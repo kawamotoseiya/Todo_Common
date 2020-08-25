@@ -7,6 +7,7 @@ describe 'ユーザーのテスト' do
     fill_in 'user[name]', with: user.name
     fill_in 'user[password]', with: user.password
     click_button 'ログイン'
+    find('#search-button').click
     fill_in 'search[content]', with: group.id
     click_on '検索'
   end
@@ -19,6 +20,7 @@ describe 'ユーザーのテスト' do
   		expect(page).to have_content group.name
   	  end
   	  it 'グループ検索見つからない時' do
+        find('#search-button').click
   	  	fill_in 'search[content]', with: '100'
   	  	click_on '検索'
   	  	expect(page).to have_content "一致するグループは見つかりませんでした。"

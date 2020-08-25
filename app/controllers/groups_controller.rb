@@ -25,8 +25,19 @@ class GroupsController < ApplicationController
 		@group_users = GroupUser.where(user_id: current_user.id, join_status: '参加中' ).page(params[:page]).per(12)
 	end
 	def edit
+		if Group.exists?(id: params[:id])
 			@group = Group.find(params[:id])
 			group_user = GroupUser.find_by(group_id: @group.id, user_id: current_user.id)
+			unless group_user.nil?
+				if  group_user.permit_status != "許可"
+					redirect_to groups_path
+				end
+			else
+			redirect_to groups_path
+			end
+		else
+			redirect_to groups_path
+		end
 	end
 	def update
 		@group = Group.find(params[:id])
