@@ -3,7 +3,7 @@ class SearchController < ApplicationController
 	def search_form
 	end
 
-	def search
+	def search  #グループIDの検索
 		content = params["search"]["content"]
 		if Group.exists?(id: content)
 		@group = Group.find_by(id: content)
@@ -16,7 +16,7 @@ class SearchController < ApplicationController
 	def not_search
 		
 	end
-	def search_date
+	def search_date  #日付検索
 		date = params["search"]["date"]
 		@today = Date.current
 		if Group.exists?(id: params[:group_id])

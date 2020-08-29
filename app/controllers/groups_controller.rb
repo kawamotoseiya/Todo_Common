@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
 		@group.user_id = current_user.id
 		if @group.save
 		flash[:group_create] = "新たなグループを作成しました！"
-		@group_user = GroupUser.new
+		@group_user = GroupUser.new            #グループ作成者のグループユーザーのデータ作成
 		@group_user.user_id = current_user.id
 		@group_user.group_id = @group.id
 		@group_user.permit_status = '許可'
@@ -57,10 +57,5 @@ class GroupsController < ApplicationController
 	private
 	def group_params
 		params.require(:group).permit(:user_id, :name, :group_key_flag)
-	end
-	def group_exists
-		unless Group.exists?(id: params[:group_id])
-			redirect_to groups_path
-		end
 	end
 end

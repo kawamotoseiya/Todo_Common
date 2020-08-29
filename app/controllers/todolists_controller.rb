@@ -1,6 +1,6 @@
 class TodolistsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :group_exists, only: [:new, :index, :show, :edit]
+	before_action :group_exists, only: [:new, :index, :show, :edit]  #存在しないグループのときに拒否する
 	def new
 		@todolist = Todolist.new
 		@group = Group.find(params[:group_id])

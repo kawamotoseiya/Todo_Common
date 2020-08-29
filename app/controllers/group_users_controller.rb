@@ -16,7 +16,7 @@ class GroupUsersController < ApplicationController
 		redirect_to groups_path
 		end
 	end
-	def create
+	def create  #参加申請をしてきたユーザーの処理
 		group = Group.find(params[:group_id])
 		group_user = GroupUser.new
 		group_user.user_id = current_user.id
